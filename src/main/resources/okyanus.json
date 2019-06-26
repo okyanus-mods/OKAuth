@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "mod-template",
+  "id": "okauth",
   "version": "${version}",
-  "name": "Mod Template",
-  "description": "The mod template for Okyanus",
+  "name": "OKAuth",
+  "description": "Offline mode authentication",
   "environment": "server",
   "depends": {
     "okyanus": ">=0.1.0",
@@ -11,7 +11,7 @@
   },
   "entrypoints": {
     "server": [
-      "club.issizler.template.TemplateMod"
+      "club.issizler.okauth.OKAuthMod"
     ]
   }
 }
