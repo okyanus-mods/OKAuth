@@ -58,4 +58,7 @@ public enum Auth {
         return false;
     }
 
+    public void disconnect(UUID uuid) {
+        _isLoggedIn.remove(uuid);
+    }
 }

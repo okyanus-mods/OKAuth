@@ -1,13 +1,13 @@
 package club.issizler.okauth.events;
 
 import club.issizler.okauth.Auth;
+import club.issizler.okyanus.api.event.BreakEvent;
 import club.issizler.okyanus.api.event.EventHandler;
-import club.issizler.okyanus.api.event.MoveEvent;
 
-public class MoveListener implements EventHandler<MoveEvent> {
+public class BreakListener implements EventHandler<BreakEvent> {
 
     @Override
-    public void handle(MoveEvent event) {
+    public void handle(BreakEvent event) {
         if (!Auth.INSTANCE.isLoggedIn(event.getPlayer().getUUID()))
             event.setCancelled(true);
     }

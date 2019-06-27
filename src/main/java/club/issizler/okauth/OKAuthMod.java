@@ -3,9 +3,7 @@ package club.issizler.okauth;
 import club.issizler.okauth.cmd.LoginCommand;
 import club.issizler.okauth.cmd.RegisterCommand;
 import club.issizler.okauth.db.Database;
-import club.issizler.okauth.events.JoinListener;
-import club.issizler.okauth.events.MoveListener;
-import club.issizler.okauth.events.StopListener;
+import club.issizler.okauth.events.*;
 import club.issizler.okyanus.api.Mod;
 import club.issizler.okyanus.api.cmd.ArgumentType;
 import club.issizler.okyanus.api.cmd.CommandBuilder;
@@ -56,9 +54,12 @@ public class OKAuthMod implements Mod {
             e.printStackTrace();
         }
 
-        EventManager.INSTANCE.register(new StopListener());
+        EventManager.INSTANCE.register(new BreakListener());
+        EventManager.INSTANCE.register(new DropListener());
         EventManager.INSTANCE.register(new JoinListener());
+        EventManager.INSTANCE.register(new LeaveListener());
         EventManager.INSTANCE.register(new MoveListener());
+        EventManager.INSTANCE.register(new StopListener());
     }
 
 }
