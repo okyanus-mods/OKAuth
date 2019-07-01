@@ -3,12 +3,14 @@ package club.issizler.okauth.cmd;
 import club.issizler.okauth.Auth;
 import club.issizler.okyanus.api.cmd.CommandRunnable;
 import club.issizler.okyanus.api.cmd.CommandSource;
+import club.issizler.okyanus.api.entity.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 public class LoginCommand implements CommandRunnable {
@@ -18,18 +20,26 @@ public class LoginCommand implements CommandRunnable {
 
     @Override
     public int run(CommandSource source) {
-        String password = source.getArgText("password");
-        UUID uuid = source.getPlayer().getUUID();
+        Optional<String> password = source.getArgText("password");
+        Optional<Player> player = source.getPlayer();
+
+        if (!player.isPresent())
+            return -1;
+
+        UUID uuid = player.get().getUUID();
 
         try {
-            Auth.INSTANCE.login(uuid, password);
+            if (!password.isPresent())
+                return -1;
+
+            Auth.INSTANCE.login(uuid, password.get());
 
             if (Auth.INSTANCE.isLoggedIn(uuid)) {
                 source.send("§aYou have successfully logged in!");
             } else {
                 source.send("§cTry again!");
                 if (!incrementLoginCounter(uuid)) {
-                    source.getPlayer().kick("§cToo many failed login attempts.");
+                    player.get().kick("§cToo many failed login attempts.");
                 }
             }
         } catch (SQLException e) {

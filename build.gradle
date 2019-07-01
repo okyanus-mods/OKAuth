@@ -5,7 +5,7 @@ plugins {
 repositories {
     mavenCentral()
 
-    maven { url 'https://jitpack.io' }
+    maven { url 'https://maven.issizler.club/repository/maven-snapshots/' } // Use maven-releases when we release
 }
 
 group 'club.issizler'
@@ -19,12 +19,13 @@ configurations {
 }
 
 dependencies {
-    implementation "com.github.okyanus-mc:api:-SNAPSHOT"
+    // Please update this to the latest version available!
+    implementation "club.issizler.okyanus:api:0.1.0-SNAPSHOT"
 
-    // Bump these to API when OKAuth is working
-    implementation 'org.apache.logging.log4j:log4j-core:2.11.2'
+    // Not sure why that's needed
+    implementation 'org.apache.logging.log4j:log4j-api:2.8.1'
+
     fatJar 'com.h2database:h2:1.4.199'
-
     fatJar 'org.mindrot:jbcrypt:0.4'
 }
 
@@ -38,7 +39,7 @@ processResources {
     inputs.property "version", project.version
 
     from(sourceSets.main.resources.srcDirs) {
-        include "okyanus.json"
+        include "fabric.mod.json"
         expand "version": project.version
     }
 }

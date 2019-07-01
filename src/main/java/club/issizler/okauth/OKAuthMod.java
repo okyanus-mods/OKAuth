@@ -7,30 +7,26 @@ import club.issizler.okauth.events.*;
 import club.issizler.okyanus.api.Mod;
 import club.issizler.okyanus.api.cmd.ArgumentType;
 import club.issizler.okyanus.api.cmd.CommandBuilder;
-import club.issizler.okyanus.api.cmd.CommandManager;
-import club.issizler.okyanus.api.event.EventManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 
-public class OKAuthMod implements Mod {
+public class OKAuthMod extends Mod {
 
     private Logger logger = LogManager.getLogger();
 
     @Override
     public void init() {
-        CommandManager.INSTANCE.register(
-                new CommandBuilder()
-                        .name("register")
+        registerCommand(
+                new CommandBuilder("register")
                         .arg("password", ArgumentType.TEXT)
                         .arg("password_confirm", ArgumentType.TEXT)
                         .run(new RegisterCommand())
         );
 
-        CommandManager.INSTANCE.register(
-                new CommandBuilder()
-                        .name("login")
+        registerCommand(
+                new CommandBuilder("login")
                         .arg("password", ArgumentType.TEXT)
                         .run(new LoginCommand())
         );
@@ -54,12 +50,13 @@ public class OKAuthMod implements Mod {
             e.printStackTrace();
         }
 
-        EventManager.INSTANCE.register(new BreakListener());
-        EventManager.INSTANCE.register(new DropListener());
-        EventManager.INSTANCE.register(new JoinListener());
-        EventManager.INSTANCE.register(new LeaveListener());
-        EventManager.INSTANCE.register(new MoveListener());
-        EventManager.INSTANCE.register(new StopListener());
+        registerEvent(new BreakListener());
+        registerEvent(new DropListener());
+        registerEvent(new JoinListener());
+        registerEvent(new LeaveListener());
+        registerEvent(new MoveListener());
+        registerEvent(new PlaceListener());
+        registerEvent(new StopListener());
     }
 
 }
