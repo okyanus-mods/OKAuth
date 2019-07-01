@@ -6,12 +6,12 @@
   "description": "Offline mode authentication",
   "environment": "server",
   "depends": {
-    "okyanus": ">=0.1.0",
-    "okyanus-runtime": ">=0.1.0"
+    "fabricloader": ">=0.4.8",
+    "okyanus": ">=0.1.0"
   },
   "entrypoints": {
     "server": [
-      "club.issizler.okauth.OKAuthMod"
+      "club.issizler.okauth.OKAuthMod::init"
     ]
   }
 }
