@@ -51,7 +51,11 @@ public class OKAuthMod extends Mod {
         }
 
         registerEvent(new BreakListener());
+        registerEvent(new ChatListener());
         registerEvent(new DropListener());
+        registerEvent(new InteractBlockListener());
+        registerEvent(new InteractEntityListener());
+        registerEvent(new InteractItemListener());
         registerEvent(new JoinListener());
         registerEvent(new LeaveListener());
         registerEvent(new MoveListener());

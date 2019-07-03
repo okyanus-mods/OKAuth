@@ -2,6 +2,6 @@ rootProject.name = 'okauth'
 
 includeBuild("../../api") {
     dependencySubstitution {
-        substitute module('com.github.okyanus-mc:api:-SNAPSHOT') with project(':')
+        substitute module('club.issizler.okyanus:api') with project(':')
     }
 }
